@@ -21,8 +21,7 @@ else
 fi
 
 echo "Installing server"
-
-cd "./serverfiles"
 echo "stop" | java -jar "papermc.jar" --nogui 1>/dev/null 2>/dev/null
-cd ".."
 echo "Server created"
+
+cp ../servers/papermcserver "$2"

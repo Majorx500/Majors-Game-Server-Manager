@@ -1,0 +1,29 @@
+#!/bin/bash
+
+ACTIONS_DIR="./mgsm/scripts/server_actions"
+
+echo "$ACTIONS_DIR"
+
+wrong_usage() {
+  echo "Wrong usage! Available commands:"
+  echo "start    | st   -- start server"
+  echo "stop     | sp   -- stop server"
+  echo "restart  | r    -- restart server"
+}
+
+if [[ $# -ne 1 ]]; then
+  wrong_usage
+  exit
+fi
+
+case $1 in
+start | st) $ACTIONS_DIR/start.sh ;;
+
+stop | sp) $ACTIONS_DIR/stop.sh ;;
+
+restart | r) $ACTIONS_DIR/restart.sh ;;
+*)
+  wrong_usage
+
+  ;;
+esac

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-ACTIONS_DIR="./mgsm/scripts/server_actions"
-
-echo "$ACTIONS_DIR"
+# $1 -- command $2 -- container name
 
 wrong_usage() {
   echo "Wrong usage! Available commands:"
@@ -17,11 +15,17 @@ if [[ $# -ne 1 ]]; then
 fi
 
 case $1 in
-start | st) $ACTIONS_DIR/start.sh ;;
+start | st)
+  docker start $2
+  ;;
 
-stop | sp) $ACTIONS_DIR/stop.sh ;;
+stop | sp)
+  docker stop $2
+  ;;
 
-restart | r) $ACTIONS_DIR/restart.sh ;;
+restart | r)
+  docker restart $2
+  ;;
 *)
   wrong_usage
 

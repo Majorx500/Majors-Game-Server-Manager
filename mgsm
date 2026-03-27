@@ -1,1 +1,8 @@
 #!/bin/bash
+
+Servers=$(cat servers.csv | awk 'BEGIN{FS=";"} {print $2" "$1}')
+
+whiptail --title "Menu example" --menu "Choose an option" 25 78 16 \
+  $Servers
+
+# TODO: get server name (identificator) from Servers string. Get another screen for start, stop, update, restart

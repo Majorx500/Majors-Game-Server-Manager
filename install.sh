@@ -18,8 +18,6 @@ else
 fi
 
 SERV_ID=$(grep -c ${GAME,,} servers.csv)
-echo $SERV_ID
-
 if [[ $GAME = "PaperMC" ]]; then
   if [[ $# -ne 3 ]]; then
     GAME_VER=$(
@@ -38,6 +36,8 @@ if [[ $GAME = "PaperMC" ]]; then
   else
     GAME_VER=$3
   fi
+else
+  GAME_VER="latest"
 fi
 
 exit_status=$?
@@ -62,6 +62,8 @@ else
     GAME_DIR=$2
   fi
 fi
+
+echo "${GAME,,}:${GAME,,}$SERV_ID:$GAME_VER" >>servers.csv
 
 case $GAME in
 "PaperMC")

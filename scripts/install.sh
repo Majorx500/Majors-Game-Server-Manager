@@ -63,7 +63,7 @@ else
   fi
 fi
 
-echo "${GAME,,}:${GAME,,}$SERV_ID:$GAME_VER" >>servers.csv
+echo "${GAME,,};${GAME,,}${SERV_ID};$GAME_VER" >>servers.csv
 
 case $GAME in
 "PaperMC")

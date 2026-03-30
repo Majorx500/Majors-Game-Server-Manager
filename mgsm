@@ -1,8 +1,62 @@
 #!/bin/bash
 
-Servers=$(cat servers.csv | awk 'BEGIN{FS=";"} {print $2" "$1}')
+function serverMenu() {
+  STATUS=$(docker ps | grep -c "$GAME")
+  if [[ $STATUS = "1" ]]; then
+    STATUS="Running"
+  else
+    STATUS="Stopped"
+  fi
+  OPTION=$(
+    whiptail --title "Server Options" --menu "$GAME : $STATUS" 25 78 6 "Start" "Start the server" \
+      "Stop" "Stop the server" \
+      "Restart" "Restart the server" \
+      "Update" "Update the server" \
+      "Console" "Show interactive console" \
+      "Back" "Go back" 3>&1 1>&2 2>&3
+  )
 
-whiptail --title "Menu example" --menu "Choose an option" 25 78 16 \
-  $Servers
+  if [[ $OPTION = "Back" ]]; then
+    serverList
+  else
+    ./scripts/server_actions.sh ${OPTION,,} $GAME
+  fi
+}
+
+function serverList() {
+
+  Servers=$(cat servers.csv | awk 'BEGIN{FS=";"} {print $2" "$1}')
+  Server_count=$(cat servers.csv | wc -l)
+  if [[ $Server_count == "0" ]]; then
+    whiptail --title "Server List" --msgbox "No Servers Found. Click OK to go back." 8 78
+    mainMenu
+  else
+    GAME=$(
+      whiptail --title "Server List" --menu "ServerName | Game" 25 78 5 \
+        $Servers \
+        "Back" "Go back" 3>&1 1>&2 2>&3
+    )
+    if [[ $GAME = "Back" ]]; then
+      mainMenu
+    elif [[ -n $GAME ]]; then
+      serverMenu
+    fi
+
+  fi
+}
+
+function mainMenu() {
+  OPTION=$(
+    whiptail --title "Main Menu" --menu "" 25 78 2 "Install" "Create New Server" \
+      "List" "Show Server List" \
+      3>&1 1>&2 2>&3
+  )
+  case $OPTION in
+  "Install") ./scripts/install.sh ;;
+  "List") serverList ;;
+  esac
+}
+
+mainMenu
 
 # TODO: get server name (identificator) from Servers string. Get another screen for start, stop, update, restart

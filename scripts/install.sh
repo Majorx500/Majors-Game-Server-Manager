@@ -69,4 +69,7 @@ case $GAME in
 "PaperMC")
   ./scripts/install/papermc.sh $GAME_VER $GAME_DIR $SERV_ID
   ;;
+"SCPSL")
+  ./scripts/install/scpsl.sh $GAME_DIR $SERV_ID
+  ;;
 esac

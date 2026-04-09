@@ -26,9 +26,9 @@ There are two ways to install MGSM:
 
 1. Clone the repository and remove the .git folder (or keep it to be able to update)
 
-    git clone <https://github.com/Majorx500/Majors-Game-Server-Manager.git> && rm -rf Majors-Game-Server-Manager/.git
-
-2.
+  ```
+    git clone https://github.com/Majorx500/Majors-Game-Server-Manager.git && rm -rf Majors-Game-Server-Manager/.git
+  ```
 
 ## Running
 

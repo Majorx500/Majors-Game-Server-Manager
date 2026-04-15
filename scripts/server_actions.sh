@@ -28,13 +28,11 @@ stop | sp)
 restart | r)
   docker restart $2 >/dev/null
   ;;
-update | u)
-  docker restart $2 >/dev/null
-  ;;
 console | c)
   docker logs $2
   docker attach $2
   ;;
+
 *)
   wrong_usage
   ;;

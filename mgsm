@@ -59,4 +59,4 @@ function mainMenu() {
 
 mainMenu
 
-# TODO: get server name (identificator) from Servers string. Get another screen for start, stop, update, restart
+# TODO: Change whiptail to own TUI

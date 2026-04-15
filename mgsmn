@@ -1,0 +1,32 @@
+#!/bin/bash
+
+flush_screen() {
+  printf '\e[2J\e[H'
+}
+
+draw_mainmenu() {
+  printf '\e[38;5;33m\e[48;5;235m'
+  printf "\e[5;10Hoooo     oooo  ooooooo8  oooooooo8 oooo     oooo"
+  printf "\e[6;10H 8888o   888 o888    88 888         8888o   888"
+  printf "\e[7;10H 88 888o8 88 888    oooo 888oooooo  88 888o8 88"
+  printf "\e[8;10H 88  888  88 888o    88         888 88  888  88"
+  printf "\e[9;10Ho88o  8  o88o 888ooo888 o88oooo888 o88o  8  o88o"
+  printf '\e[38;5;120m'
+  printf '\e[13;15H* \e[48;5;237m\e[38;5;120mInstall Server\e[48;5;235m'
+
+}
+
+# Save the user's terminal screen.
+printf '\e[?1049h'
+printf '\e[?25l'
+printf '\e[H \e[2'
+draw_mainmenu
+while true; do
+  read -rsn1 key
+  if [[ $key = 'q' ]]; then
+    break
+  fi
+done
+
+# Restore the user's terminal screen.
+printf '\e[?1049l'
